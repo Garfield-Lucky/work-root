@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	   xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+	   xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://code.alibabatech.com/schema/dubbo http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
+
+	<dubbo:application name="${dubbo.application.name}"/>
+
+	<!-- 注册外部分组  -->
+	<dubbo:registry id="outsidecall" group="${dubbo.registry.outsidegroup}"
+	protocol="${dubbo.registry.protocol}" address="${dubbo.registry.address}"
+	check="false" />
+
+	<!-- 注册内部分组  -->
+	<dubbo:registry 
+    	id="insidecall" 
+    	group="${dubbo.registry.insidegroup}"
+    	protocol="${dubbo.registry.protocol}"
+    	address="${dubbo.registry.address}"
+        check="false"/>
+        
+	<dubbo:protocol name="${dubbo.protocol.name}" port="${dubbo.protocol.port}" threadpool="cached" />
+
+	<dubbo:provider timeout="${dubbo.provider.timeout}" />
+
+	<dubbo:consumer check="false" retries="0" />
+
+</beans>
